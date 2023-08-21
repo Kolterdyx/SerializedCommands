@@ -61,22 +61,33 @@ public:
 
 class CommandBuilder {
 public:
-    CommandBuilder &make(uint16_t command);
+    explicit CommandBuilder(uint16_t command);
 
-    CommandBuilder &arg(CommandArgType type, uint8_t *arg);
+    template<typename T>
+    CommandBuilder &arg(CommandArgType type, T arg, int pointer = 0) {
+        this->argTypes[this->argCount] = type;
+        this->argLengths[this->argCount] = sizeof(arg);
+        if (pointer) {
+            this->args[this->argCount] = new uint8_t[pointer * sizeof(arg[0])];
+            memcpy(this->args[this->argCount], arg, pointer * sizeof(arg[0]));
+        } else {
+            this->args[this->argCount] = new uint8_t[sizeof(arg)];
+            memcpy(this->args[this->argCount], &arg, sizeof(arg));
+        }
+        this->argCount++;
+        return *this;
+    }
 
-    CommandBuilder &arg(CommandArgType type, uint8_t *arg, uint8_t length);
-
-    CommandBuilder &handler(CommandHandler handler);
-
-    Command build();
+    uint8_t *build();
 
 private:
-    Command command;
+    uint16_t command;
     uint8_t argCount = 0;
     uint8_t argLengths[16]{};
     CommandArgType argTypes[16]{};
     uint8_t *args[16]{};
+
+    uint16_t calcRawCommandLength();
 };
 
 #endif //ARDUINOANTENNAALIGNER_SERIALIZEDCOMMANDS_H

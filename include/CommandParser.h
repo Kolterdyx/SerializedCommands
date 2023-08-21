@@ -1,7 +1,7 @@
 #ifndef ARDUINOANTENNAALIGNER_COMMANDPARSER_H
 #define ARDUINOANTENNAALIGNER_COMMANDPARSER_H
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "Command.h"
 
 class CommandParser {

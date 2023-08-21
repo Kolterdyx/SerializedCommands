@@ -10,7 +10,7 @@
     "srcDir": "src",
     "includeDir": "include"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository":
   {
     "type": "git",
@@ -26,4 +26,10 @@
   "headers": [
     "include/SerializedCommands.h"
   ],
+  "export": {
+    "include": [
+      "include/*",
+      "src/*"
+    ]
+  }
 }

@@ -5,6 +5,8 @@
 #ifndef ARDUINOANTENNAALIGNER_COMMAND_H
 #define ARDUINOANTENNAALIGNER_COMMAND_H
 
+#include <Arduino.h>
+
 enum CommandStatus {
     OK,
     CORRUPTED,
