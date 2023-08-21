@@ -65,14 +65,15 @@ public:
 
     template<typename T>
     CommandBuilder &arg(CommandArgType type, T arg, int pointer = 0) {
+        const auto argPointer = reinterpret_cast<uint8_t *>(&arg);
         this->argTypes[this->argCount] = type;
-        this->argLengths[this->argCount] = sizeof(arg);
+        this->argLengths[this->argCount] = strlen(reinterpret_cast<const char *>(argPointer));
         if (pointer) {
-            this->args[this->argCount] = new uint8_t[pointer * sizeof(arg[0])];
-            memcpy(this->args[this->argCount], arg, pointer * sizeof(arg[0]));
+            this->args[this->argCount] = new uint8_t[this->argLengths[this->argCount]];
+            memcpy(this->args[this->argCount], argPointer, this->argLengths[this->argCount]);
         } else {
-            this->args[this->argCount] = new uint8_t[sizeof(arg)];
-            memcpy(this->args[this->argCount], reinterpret_cast<uint8_t *>(&arg), sizeof(arg));
+            this->args[this->argCount] = new uint8_t[this->argLengths[this->argCount]];
+            memcpy(this->args[this->argCount], argPointer, this->argLengths[this->argCount]);
         }
         this->argCount++;
         return *this;
