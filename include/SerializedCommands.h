@@ -72,7 +72,7 @@ public:
             memcpy(this->args[this->argCount], arg, pointer * sizeof(arg[0]));
         } else {
             this->args[this->argCount] = new uint8_t[sizeof(arg)];
-            memcpy(this->args[this->argCount], &arg, sizeof(arg));
+            memcpy(this->args[this->argCount], reinterpret_cast<uint8_t *>(&arg), sizeof(arg));
         }
         this->argCount++;
         return *this;
