@@ -1,0 +1,29 @@
+{
+  "name": "SerializedCommands",
+  "authors": {
+    "name": "Ciro García Belmonte",
+    "email": "ciro.garcia.belmonte@gmail.com",
+    "maintainer": true
+  },
+  "description": "A library for serializing/parsing commands to make them easier to transfer over serial.",
+  "build": {
+    "srcDir": "src",
+    "includeDir": "include"
+  },
+  "version": "0.1.0",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/Kolterdyx/SerializedCommands.git"
+  },
+  "keywords": [
+    "arduino",
+    "serial",
+    "commands",
+    "communication"
+  ],
+  "license": "MIT",
+  "headers": [
+    "include/SerializedCommands.h"
+  ],
+}
